@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Vulnerable SPA Demo</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+		<style>
+			body {
+				font-family: "Inter", sans-serif;
+			}
+			.gradient-bg {
+				background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+			}
+		</style>
+	</head>
+	<body class="bg-gray-100 text-gray-800">
+		<!-- Navigation Bar -->
+		<nav class="bg-white shadow-md">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex items-center justify-between h-16">
+					<div class="flex items-center">
+						<div class="flex-shrink-0">
+							<svg
+								class="h-8 w-8 text-blue-600"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+								/>
+							</svg>
+						</div>
+						<div class="hidden md:block">
+							<div class="ml-10 flex items-baseline space-x-4">
+								<a
+									href="#"
+									class="text-gray-700 hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+									>Home</a
+								>
+								<a
+									href="#vulnerabilities"
+									class="text-gray-700 hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+									>Vulnerabilities</a
+								>
+								<a
+									href="#"
+									class="text-gray-700 hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+									>About</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Hero Section -->
+		<header class="gradient-bg text-white">
+			<div class="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 text-center">
+				<h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">Secure Application Showcase</h1>
+				<p class="mt-6 max-w-3xl mx-auto text-xl">A demonstration of OWASP Top 10 vulnerabilities in a modern SPA.</p>
+			</div>
+		</header>
+
+		<!-- Main Content -->
+		<main class="py-12">
+			<div id="vulnerabilities" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<!-- OWASP A03:2021 - Injection (Cross-Site Scripting) -->
+				<div class="bg-white rounded-lg shadow-lg p-8 mb-12">
+					<h2 class="text-2xl font-bold mb-1 text-gray-900">A03:2021 - Injection (Stored XSS)</h2>
+					<p class="text-sm text-red-600 font-semibold mb-4">VULNERABILITY DEMO</p>
+					<p class="mb-6 text-gray-600">
+						This comment section is vulnerable to Stored Cross-Site Scripting (XSS). User input is sent to the server
+						and stored, then rendered directly into the page for all users without proper sanitization.
+					</p>
+
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+						<!-- Comment Form -->
+						<div>
+							<h3 class="text-xl font-semibold mb-4">Leave a Comment</h3>
+							<form id="comment-form" class="space-y-4">
+								<div>
+									<label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+									<input
+										type="text"
+										id="username"
+										name="username"
+										class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+										value="Guest"
+									/>
+								</div>
+								<div>
+									<label for="comment" class="block text-sm font-medium text-gray-700">Comment</label>
+									<textarea
+										id="comment"
+										name="comment"
+										rows="4"
+										class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+									></textarea>
+								</div>
+								<div>
+									<button
+										type="submit"
+										class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+									>
+										Post Comment
+									</button>
+								</div>
+							</form>
+							<div class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-md">
+								<p class="font-bold">Try this XSS Payload:</p>
+								<code class="text-sm break-all"
+									>&lt;img src=x onerror=alert('XSS-Vulnerability-Demonstrated!')&gt;</code
+								>
+							</div>
+						</div>
+
+						<!-- Comment Display Section -->
+						<div>
+							<h3 class="text-xl font-semibold mb-4">Comments</h3>
+							<div id="comments-section" class="space-y-4 max-h-96 overflow-y-auto p-4 bg-gray-50 rounded-lg border">
+								<!-- Comments will be loaded here -->
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- OWASP A01:2021 - Broken Access Control -->
+				<div class="bg-white rounded-lg shadow-lg p-8">
+					<h2 class="text-2xl font-bold mb-1 text-gray-900">A01:2021 - Broken Access Control</h2>
+					<p class="text-sm text-red-600 font-semibold mb-4">VULNERABILITY DEMO</p>
+					<p class="mb-6 text-gray-600">
+						This section demonstrates a common Broken Access Control flaw. The button below fetches data from a
+						privileged `/api/admin/data` endpoint. The endpoint is not protected on the server, allowing any user to
+						access it.
+					</p>
+
+					<div class="text-center">
+						<button
+							id="admin-fetch"
+							class="py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+						>
+							Access Admin Panel
+						</button>
+					</div>
+					<div id="admin-result" class="mt-6 p-4 bg-gray-100 rounded-md text-left hidden font-mono text-sm">
+						<!-- Result will be displayed here -->
+					</div>
+					<div class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-md">
+						<p class="font-bold">How it works:</p>
+						<p class="text-sm">
+							An attacker can use browser developer tools to discover the `/api/admin/data` endpoint and call it
+							directly, bypassing any client-side UI restrictions that might normally hide the button.
+						</p>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- Footer -->
+		<footer class="bg-gray-800 text-white mt-12">
+			<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center">
+				<p>&copy; 2024 Secure App Demo. For educational purposes only.</p>
+			</div>
+		</footer>
+
+		<script>
+			const commentForm = document.getElementById("comment-form");
+			const commentsSection = document.getElementById("comments-section");
+
+			// Function to render a single comment
+			function renderComment({ username, comment }) {
+				const commentElement = document.createElement("div");
+				commentElement.className = "p-4 bg-white rounded-lg shadow";
+				// DANGEROUS: Directly setting innerHTML with user input without sanitization.
+				commentElement.innerHTML = `
+                <p class="font-semibold text-blue-700">${username}</p>
+                <div class="text-gray-700 mt-1">${comment}</div>
+            `;
+				commentsSection.appendChild(commentElement);
+			}
+
+			// Function to fetch and display all comments
+			async function loadComments() {
+				commentsSection.innerHTML = "<p>Loading comments...</p>";
+				try {
+					const response = await fetch("/comments");
+					const comments = await response.json();
+					commentsSection.innerHTML = ""; // Clear loading message
+					if (comments.length === 0) {
+						commentsSection.innerHTML = "<p>No comments yet. Be the first!</p>";
+					} else {
+						comments.forEach(renderComment);
+					}
+				} catch (error) {
+					commentsSection.innerHTML = '<p class="text-red-500">Failed to load comments.</p>';
+					console.error("Error loading comments:", error);
+				}
+			}
+
+			// Event listener for submitting a new comment
+			commentForm.addEventListener("submit", async function (event) {
+				event.preventDefault();
+
+				const username = document.getElementById("username").value;
+				const commentText = document.getElementById("comment").value;
+
+				if (commentText.trim() === "") return;
+
+				try {
+					const response = await fetch("/comments", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ username, comment: commentText }),
+					});
+					const newComment = await response.json();
+					renderComment(newComment); // Add the new comment to the list
+					document.getElementById("comment").value = ""; // Clear the form
+				} catch (error) {
+					alert("Failed to post comment.");
+					console.error("Error posting comment:", error);
+				}
+			});
+
+			// --- Broken Access Control Vulnerability Logic ---
+			const adminFetchButton = document.getElementById("admin-fetch");
+			const adminResult = document.getElementById("admin-result");
+
+			adminFetchButton.addEventListener("click", async function () {
+				adminResult.classList.remove("hidden");
+				adminResult.innerHTML = '<p class="text-gray-600">Attempting to fetch /api/admin/data...</p>';
+
+				try {
+					const response = await fetch("/api/admin/data");
+					const data = await response.json();
+
+					// Display the sensitive data received from the insecure endpoint
+					adminResult.innerHTML = `
+                    <p class="font-bold text-green-600">${data.message}</p>
+                    <pre class="mt-2 whitespace-pre-wrap text-left">${JSON.stringify(data.data, null, 2)}</pre>
+                `;
+					adminResult.className =
+						"mt-6 p-4 bg-green-100 rounded-md text-left font-mono text-sm border border-green-300";
+				} catch (error) {
+					adminResult.innerHTML = `<p class="font-bold text-red-600">Failed to fetch admin data.</p>`;
+					adminResult.classList.add("bg-red-100", "border", "border-red-300");
+					console.error("Error fetching admin data:", error);
+				}
+			});
+
+			// Initial load of comments when the page is ready
+			document.addEventListener("DOMContentLoaded", loadComments);
+		</script>
+	</body>
+</html>
