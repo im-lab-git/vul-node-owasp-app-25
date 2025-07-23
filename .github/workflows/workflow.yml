@@ -13,7 +13,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: im-lab-git/vul-java-demo
+  IMAGE_NAME: im-lab-git/vul-node-owasp-app-25
 
 jobs:
   docker-build-push:
